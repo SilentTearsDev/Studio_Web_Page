@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,28 +128,8 @@
       user-select:none;
     }
 
-    .subtitle{
-      margin-top: 10px;
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px 18px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-    }
-    .pill{
-      border: 1px solid var(--line);
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(0,255,120,.03);
-      box-shadow: 0 0 0 1px rgba(0,255,120,.05) inset;
-    }
-
-    /* Sections (no "block card" look) */
-    section{
-      padding: 0;
-      margin: 0;
-    }
+    /* Sections */
+    section{ padding:0; margin:0; }
 
     h2{
       margin: 0 0 8px;
@@ -241,7 +222,7 @@
       font-size: 12px;
     }
 
-    /* Small flicker (very subtle, no "cmd code") */
+    /* Small flicker */
     .flicker{
       animation: flicker 6.5s infinite;
     }
@@ -277,23 +258,24 @@
  ____) | | |  __/ | | | |_  | |_| | |  __/  (_| | (_| |   ____) | |_| |_| | (_| | | (_) |
 |_____/|_|_|\___|_| |_|\__| |____/   \___| \__,_|\__,_|  |_____/ \__|\__,_|\__,_|_|\___/
 </pre>
-    
     </header>
 
     <section id="intro">
       <div class="divider"></div>
       <h2>Introduction</h2>
       <p class="lead">
-        I’m a developer from Hungary. I’m working on a story-focused game in Godot, building useful tools with Python,
-        and running a home server to experiment with hosting and automation. This page is where I post quick dev logs,
-        progress notes, and links.
+        I’m a developer from Hungary. I’m working on some games in Godot, building useful and fun tools and other stuff with Python,
+        and running a home server to play with it and try automation. This page is where I post quick dev logs,
+        progress notes, and links and also test things :)
       </p>
     </section>
 
     <section id="news">
       <div class="divider"></div>
       <h2>News</h2>
-      <div class="rows">
+
+      <!-- This will be replaced by updates.json if it loads successfully -->
+      <div class="rows" id="newsRows">
         <div class="row">
           <div class="meta"><span>Devlog</span><span>•</span><span>2026-01-02</span></div>
           <h3>Working on the story game</h3>
@@ -333,16 +315,25 @@
       </div>
     </section>
 
-    <section id="links">
-      <div class="divider"></div>
-      <h2>Links</h2>
-      <div class="links">
-        <a class="link" href="#" onclick="alert('Paste your itch.io link here'); return false;">Itch.io</a>
-        <a class="link" href="#" onclick="alert('Paste your Steam link here'); return false;">Steam</a>
-        <a class="link" href="#" onclick="alert('Paste your GitHub link here'); return false;">GitHub</a>
-        <a class="link" href="#" onclick="alert('Paste your Discord link here'); return false;">Discord</a>
-      </div>
-    </section>
+  <section id="links">
+  <div class="divider"></div>
+  <h2>Links</h2>
+  <div class="links">
+    <a class="link" href="https://silentdeadstudio.itch.io" target="_blank" rel="noopener">
+      Itch.io
+    </a>
+    <a class="link" href="https://store.steampowered.com/app/XXXXXXXX" target="_blank" rel="noopener">
+      Steam
+    </a>
+    <a class="link" href="https://github.com/SilentTearsDev" target="_blank" rel="noopener">
+      GitHub
+    </a>
+    <a class="link" href="https://discord.gg/sUsxxBJAW6" target="_blank" rel="noopener">
+      Discord
+    </a>
+  </div>
+</section>
+
 
     <footer>
       <div>© <span id="year"></span> Silent Dead Studio</div>
@@ -352,6 +343,48 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    function esc(s){
+      return String(s).replace(/[&<>"']/g, m => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[m]));
+    }
+
+    async function loadUpdates(){
+      const container = document.getElementById("newsRows");
+      if (!container) return;
+
+      try {
+        const res = await fetch("updates.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("updates.json not found");
+
+        const data = await res.json();
+        const updates = data.updates || [];
+
+        if (updates.length === 0) return;
+
+        container.innerHTML = updates.slice(0, 6).map(u => `
+          <div class="row">
+            <div class="meta">
+              <span>GitHub</span><span>•</span><span>${esc(u.date)}</span>
+            </div>
+            <h3>
+              <a class="link" href="${esc(u.url)}" target="_blank" rel="noopener noreferrer">
+                ${esc(u.repo)}
+              </a>
+            </h3>
+            <p>${esc(u.title)}</p>
+          </div>
+        `).join("");
+
+      } catch (err) {
+        // If loading fails, keep the fallback (your hardcoded rows)
+        console.warn("GitHub updates not loaded:", err);
+      }
+    }
+
+    loadUpdates();
   </script>
 </body>
 </html>
+
