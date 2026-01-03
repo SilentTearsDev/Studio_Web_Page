@@ -5,20 +5,20 @@
     {
       "repo": "Studio_Web_Page",
       "date": "2026-01-03",
-      "title": "Merge branch 'main' of https://github.com/SilentTearsDev/Studio_Web_Page",
-      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/161e82d2c4bb20442dec5881f9bef2d2f477d569"
+      "title": "Update updates.json",
+      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/4c5c5ab87f1757552fd47595e61e34d80b9ade19"
+    },
+    {
+      "repo": "NEXA",
+      "date": "2026-01-03",
+      "title": "Create README.md",
+      "url": "https://github.com/SilentTearsDev/NEXA/commit/d223acea906aa78fb55373cf9af72f904b190357"
     },
     {
       "repo": "Python",
       "date": "2026-01-02",
       "title": ".",
       "url": "https://github.com/SilentTearsDev/Python/commit/3fdb76e3850a560a1d5bbfdca885f0404bbee6e6"
-    },
-    {
-      "repo": "NEXA",
-      "date": "2026-01-02",
-      "title": ".",
-      "url": "https://github.com/SilentTearsDev/NEXA/commit/77a897c55f1d34df6a01a07fed1c561f67ec449e"
     }
   ],
   "errors": []
