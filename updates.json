@@ -5,8 +5,8 @@
     {
       "repo": "Studio_Web_Page",
       "date": "2026-01-03",
-      "title": "Update updates.json",
-      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/6a0d7d7d3cef53d119ca159d4869df4416e276bc"
+      "title": "Update static.yml",
+      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/d826d94e78db5c3684fcd1c9b946078aecb5a9c2"
     },
     {
       "repo": "Python",
@@ -21,16 +21,5 @@
       "url": "https://github.com/SilentTearsDev/NEXA/commit/77a897c55f1d34df6a01a07fed1c561f67ec449e"
     }
   ],
-  "errors": [
-    {
-      "repo": "Silent_Tears",
-      "status": 404,
-      "detail": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/commits/commits#list-commits\",\"status\":\"404\"}"
-    },
-    {
-      "repo": "Knight-Joe",
-      "status": 404,
-      "detail": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/commits/commits#list-commits\",\"status\":\"404\"}"
-    }
-  ]
+  "errors": []
 }
