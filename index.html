@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Silent Dead Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#050806;
+      --fg: rgba(200,255,210,.92);
+      --muted: rgba(160,255,180,.62);
+      --line: rgba(120,255,140,.16);
+      --glow: rgba(0,255,120,.22);
+      --glow2: rgba(0,255,120,.10);
+      --hot: rgba(0,255,150,.65);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color: var(--fg);
+      background: var(--bg);
+      overflow-x:hidden;
+    }
+
+    /* Background image + hacker vibe layers */
+    .bg{
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(900px 420px at 20% 15%, rgba(0,255,120,.18), transparent 60%),
+        radial-gradient(900px 420px at 80% 25%, rgba(0,255,120,.12), transparent 62%),
+        radial-gradient(1100px 620px at 50% 85%, rgba(0,255,120,.10), transparent 65%),
+        url("images/studio_logo_with_black_png_no_label.png");
+      background-repeat: no-repeat;
+      background-size: 1400px auto;
+      background-position: center 12%;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    /* Darken image and unify everything */
+    .bg:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.78) 35%, rgba(0,0,0,.88) 100%),
+        radial-gradient(800px 420px at 50% 25%, rgba(0,0,0,.35), rgba(0,0,0,.85));
+      z-index: -2;
+    }
+
+    /* Scanlines */
+    .scanlines{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,.0) 0px,
+        rgba(0,0,0,.0) 2px,
+        rgba(0,0,0,.14) 3px
+      );
+      opacity: .55;
+      mix-blend-mode: multiply;
+    }
+
+    /* Subtle grid */
+    .grid{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(to right, rgba(0,255,120,.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,255,120,.06) 1px, transparent 1px);
+      background-size: 56px 56px;
+      opacity: .28;
+      filter: blur(.1px);
+    }
+
+    /* Glow vignettes */
+    .vignette{
+      position: fixed;
+      inset: 0;
+      pointer-events:none;
+      z-index:-1;
+      background:
+        radial-gradient(900px 520px at 50% 20%, rgba(0,255,140,.08), transparent 60%),
+        radial-gradient(1200px 900px at 50% 120%, rgba(0,0,0,.9), rgba(0,0,0,.98));
+      opacity: 1;
+    }
+
+    /* Layout */
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 34px 22px 28px;
+      min-height: 100vh;
+      display:flex;
+      flex-direction:column;
+      gap: 18px;
+    }
+
+    /* Top title (ASCII) */
+    .title{
+      padding: 14px 0 6px;
+      border-bottom: 1px solid var(--line);
+    }
+    .title pre{
+      margin:0;
+      white-space: pre;
+      font-size: 11px;
+      line-height: 1.15;
+      letter-spacing: .6px;
+      color: rgba(210,255,220,.94);
+      text-shadow:
+        0 0 10px rgba(0,255,140,.20),
+        0 0 28px rgba(0,255,140,.10);
+      user-select:none;
+    }
+
+    /* Sections */
+    section{ padding:0; margin:0; }
+
+    h2{
+      margin: 0 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+      color: rgba(210,255,220,.92);
+      text-shadow: 0 0 12px rgba(0,255,140,.10);
+    }
+
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(0,255,120,.18), transparent);
+      margin: 10px 0 14px;
+    }
+
+    .lead{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+      max-width: 90ch;
+    }
+    .lead strong{ color: var(--fg); }
+
+    /* Lists */
+    .rows{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+    }
+    .row{
+      padding: 10px 0;
+      border-top: 1px dashed rgba(0,255,120,.18);
+    }
+    .row:first-child{ border-top: 0; }
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: rgba(160,255,180,.55);
+      font-size: 12px;
+      letter-spacing: .3px;
+      margin-bottom: 6px;
+    }
+    .row h3{
+      margin: 0 0 6px;
+      font-size: 14px;
+      letter-spacing: .2px;
+      color: rgba(210,255,220,.92);
+    }
+    .row p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    /* Links bar */
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    a.link{
+      color: rgba(210,255,220,.9);
+      text-decoration:none;
+      border-bottom: 1px solid rgba(0,255,120,.25);
+      padding-bottom: 2px;
+      transition: color .12s ease, border-color .12s ease, text-shadow .12s ease;
+    }
+    a.link:hover{
+      color: rgba(230,255,235,.98);
+      border-color: rgba(0,255,140,.55);
+      text-shadow: 0 0 10px rgba(0,255,140,.18);
+    }
+
+    /* Footer */
+    footer{
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      color: rgba(160,255,180,.55);
+      font-size: 12px;
+    }
+
+    /* Small flicker */
+    .flicker{
+      animation: flicker 6.5s infinite;
+    }
+    @keyframes flicker{
+      0%, 100% { opacity: 1; }
+      92% { opacity: .98; }
+      93% { opacity: .92; }
+      94% { opacity: 1; }
+      96% { opacity: .97; }
+    }
+
+    @media (max-width: 720px){
+      .bg{ background-size: 1000px auto; background-position: center 10%; }
+      .title pre{ font-size: 10px; }
+      .wrap{ padding: 26px 16px 22px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="grid" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div class="wrap flicker">
+    <header class="title" aria-label="SILENT DEAD STUDIO">
+<pre>
+  _____   _            _     ____                    _     _____ _             _ _
+ / ____| | |          | |   |  _ \                  | |   / ____| |           | (_)
+| (___  _| | ___ _ __ | |_  | | | |   ___   __ _  __| |  | (___ | |_ _   _  __| |_  ___
+ \___ \| | |/ _ \ '_ \| __| | | | |  / _ \ / _` |/ _` |   \___ \| __| | | |/ _` | |/ _ \
+ ____) | | |  __/ | | | |_  | |_| | |  __/  (_| | (_| |   ____) | |_| |_| | (_| | | (_) |
+|_____/|_|_|\___|_| |_|\__| |____/   \___| \__,_|\__,_|  |_____/ \__|\__,_|\__,_|_|\___/
+</pre>
+    </header>
+
+    <section id="intro">
+      <div class="divider"></div>
+      <h2>Introduction</h2>
+      <p class="lead">
+        I’m a developer from Hungary. I’m working on some games in Godot, building useful and fun tools and other stuff with Python,
+        and running a home server to play with it and try automation. This page is where I post quick dev logs,
+        progress notes, and links and also test things :)
+      </p>
+    </section>
+
+    <section id="news">
+      <div class="divider"></div>
+      <h2>News</h2>
+
+      <!-- This will be replaced by updates.json if it loads successfully -->
+      <div class="rows" id="newsRows">
+        <div class="row">
+          <div class="meta"><span>Devlog</span><span>•</span><span>2026-01-02</span></div>
+          <h3>Working on the story game</h3>
+          <p>UI cleanup, interaction tweaks, and preparing a few screenshots for the project page.</p>
+        </div>
+
+        <div class="row">
+          <div class="meta"><span>Python</span><span>•</span><span>2025-12-20</span></div>
+          <h3>Python tools progress</h3>
+          <p>Small utilities and automation experiments. Next: packaging and making them easier to use.</p>
+        </div>
+
+        <div class="row">
+          <div class="meta"><span>Site</span><span>•</span><span>2025-11-10</span></div>
+          <h3>Website layout update</h3>
+          <p>Less clutter, more spacing, clearer sections.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="divider"></div>
+      <h2>Projects</h2>
+
+      <div class="rows">
+        <div class="row">
+          <div class="meta"><span>Godot</span><span>•</span><span>Status: In development</span></div>
+          <h3>Story game</h3>
+          <p>A narrative project focused on atmosphere, scenes, and clean interaction design.</p>
+        </div>
+
+        <div class="row">
+          <div class="meta"><span>Python</span><span>•</span><span>Status: Ongoing</span></div>
+          <h3>Python projects</h3>
+          <p>Tools, home-server automation scripts, and small utilities I use to automate tasks and experiment with packaging.</p>
+        </div>
+      </div>
+    </section>
+
+  <section id="links">
+  <div class="divider"></div>
+  <h2>Links</h2>
+  <div class="links">
+    <a class="link" href="https://silentdeadstudio.itch.io" target="_blank" rel="noopener">
+      Itch.io
+    </a>
+    <a class="link" href="https://store.steampowered.com/app/XXXXXXXX" target="_blank" rel="noopener">
+      Steam
+    </a>
+    <a class="link" href="https://github.com/SilentTearsDev" target="_blank" rel="noopener">
+      GitHub
+    </a>
+    <a class="link" href="https://discord.gg/sUsxxBJAW6" target="_blank" rel="noopener">
+      Discord
+    </a>
+  </div>
+</section>
+
+
+    <footer>
+      <div>© <span id="year"></span> Silent Dead Studio</div>
+      <div>Developer notes and project updates</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function esc(s){
+      return String(s).replace(/[&<>"']/g, m => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[m]));
+    }
+
+    async function loadUpdates(){
+      const container = document.getElementById("newsRows");
+      if (!container) return;
+
+      try {
+        const res = await fetch("updates.json?v=" + Date.now());
+        if (!res.ok) throw new Error("updates.json not found");
+
+        const data = await res.json();
+        const updates = data.updates || [];
+
+        if (updates.length === 0) return;
+
+        container.innerHTML = updates.slice(0, 6).map(u => `
+          <div class="row">
+            <div class="meta">
+              <span>GitHub</span><span>•</span><span>${esc(u.date)}</span>
+            </div>
+            <h3>
+              <a class="link" href="${esc(u.url)}" target="_blank" rel="noopener noreferrer">
+                ${esc(u.repo)}
+              </a>
+            </h3>
+            <p>${esc(u.title)}</p>
+          </div>
+        `).join("");
+
+      } catch (err) {
+        // If loading fails, keep the fallback (your hardcoded rows)
+        console.warn("GitHub updates not loaded:", err);
+      }
+    }
+
+    loadUpdates();
+  </script>
+</body>
+</html>
+
