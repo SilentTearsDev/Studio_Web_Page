@@ -6,19 +6,19 @@
       "repo": "Studio_Web_Page",
       "date": "2026-01-30",
       "title": "Update updates.json",
-      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/ac96770b2752d0e25587543bc86e7c87daf466c2"
+      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/0b85a71c6e2306ebf786f43de8acd1b045e810d4"
+    },
+    {
+      "repo": "Python",
+      "date": "2026-01-30",
+      "title": ".",
+      "url": "https://github.com/SilentTearsDev/Python/commit/678d60aba1e936e5b1a93a4e1f7f97826fe6e3b0"
     },
     {
       "repo": "NEXA",
       "date": "2026-01-03",
       "title": "Create README.md",
       "url": "https://github.com/SilentTearsDev/NEXA/commit/d223acea906aa78fb55373cf9af72f904b190357"
-    },
-    {
-      "repo": "Python",
-      "date": "2026-01-02",
-      "title": ".",
-      "url": "https://github.com/SilentTearsDev/Python/commit/3fdb76e3850a560a1d5bbfdca885f0404bbee6e6"
     }
   ],
   "errors": []
