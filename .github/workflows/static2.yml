@@ -8,7 +8,7 @@ name: Build updates.json + Deploy Pages
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/59 * * * *"   # every 5 minutes
+    - cron: "*/59 * * * *"   # Runs every 59 minutes
   push:
     branches: ["main"]
 
