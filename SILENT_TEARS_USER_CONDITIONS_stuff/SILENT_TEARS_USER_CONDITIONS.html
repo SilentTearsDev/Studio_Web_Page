@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>⚠ SILENT TEARS — WARNING ⚠</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0c10;
+    --panel:#11131a;
+    --panel2:#0e1016;
+    --fg:#c7cad1;
+    --muted:#8b909a;
+    --accent:#b35a5a;      /* muted blood-red */
+    --accent2:#5f6c7a;     /* cold steel */
+    --danger:#d47a7a;
+    --shadow: rgba(0,0,0,.55);
+    --dangerGlow: rgba(212,122,122,.22);
+    --okGlow: rgba(95,108,122,.12);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Press Start 2P',cursive;
+    padding:2rem;
+    margin:auto;
+    max-width:1000px;
+    line-height:1.8;
+    border:4px dashed var(--border);
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  
+  body::before{
+    content:"";
+    position:fixed;
+    inset:-20px;
+    z-index:-2;
+    pointer-events:none;
+
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='24' height='24' filter='url(%23n)' opacity='.55'/></svg>"),
+      radial-gradient(ellipse at center, rgba(255,0,0,.08) 0%, rgba(255,0,0,0) 55%),
+      radial-gradient(ellipse at 50% 20%, rgba(95,108,122,.04) 0%, rgba(95,108,122,0) 60%);
+    background-size: 96px 96px, 1200px 1200px, 900px 900px;
+    background-repeat: repeat, no-repeat, no-repeat;
+    background-position: 0 0, center, center;
+    image-rendering: pixelated;
+
+    opacity:.55;
+    filter: contrast(140%) brightness(75%);
+    mix-blend-mode: screen;
+  }
+
+  body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,.0) 0px,
+        rgba(0,0,0,.0) 3px,
+        rgba(0,0,0,.35) 4px
+      ),
+      radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.85) 100%),
+      radial-gradient(ellipse at center, rgba(255,0,0,.12) 0%, rgba(255,0,0,0) 60%);
+    opacity:.9;
+  }
+
+  h1{
+    color:var(--accent);
+    margin:1rem 0;
+    text-align:center;
+    font-size:2rem;
+    text-shadow:3px 3px 0px #ff0000,6px 6px 0px rgba(255,0,0,0.3);
+    animation:blink 6s infinite;
+  }
+  /* fixed your broken keyframes */
+  @keyframes blink{0%,100%{opacity:.85}50%{opacity:1}}
+
+  .warning-header{
+    text-align:center;
+    margin:1rem 0 2rem;
+    font-size:3rem;
+    animation:pulse 10s infinite;
+    filter: drop-shadow(0 0 10px var(--dangerGlow));
+  }
+  /* fixed your broken keyframes */
+  @keyframes pulse{
+    0%,100%{filter:saturate(.9); opacity:.92; transform:scale(1)}
+    50%{filter:saturate(1); opacity:1; transform:scale(1.08)}
+  }
+
+  /* ---- BUTTONS (make them fit the UI) ---- */
+  .btn{
+    background:var(--panel);
+    color:var(--fg);
+    border:3px solid rgba(199,202,209,.55);
+    border-radius:0;
+    padding:0.75rem 1.25rem;
+    cursor:pointer;
+
+    /* IMPORTANT: the bold look came from this */
+    font-weight:400;
+    font-family:'Press Start 2P',cursive;
+    font-size:0.72rem;
+
+    transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
+    user-select:none;
+    margin:0.5rem;
+    text-transform:uppercase;
+    box-shadow:0 0 0 transparent;
+    letter-spacing:1px;
+  }
+  .btn:hover{
+    background:var(--panel2);
+    border-color:var(--accent2);
+    box-shadow:0 0 14px rgba(95,108,122,.18);
+    transform:scale(1.03);
+  }
+  .btn:active{transform:scale(0.97)}
+  .btn:focus-visible{
+    outline:none;
+    box-shadow:0 0 0 3px rgba(212,122,122,.18), 0 0 16px rgba(212,122,122,.18);
+    border-color:var(--accent);
+  }
+
+  /* Make the language button look like a small UI chip */
+  #lang-btn{
+    position:fixed;
+    right:2rem;
+    top:2rem;
+    z-index:1000;
+    padding:0.55rem 0.9rem;
+    font-size:0.65rem;
+    border-color:rgba(212,122,122,.45);
+  }
+  #lang-btn:hover{
+    border-color:var(--accent);
+    box-shadow:0 0 18px rgba(255,0,0,.16), 0 0 14px rgba(95,108,122,.12);
+  }
+
+  /* Back button: centered, same style, a bit wider */
+  #back-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin:2.2rem auto 1.2rem;
+    padding:0.9rem 1.6rem;
+    min-width:260px;
+  }
+
+  #studio-logo{display:block;margin:1.5rem auto;width:140px;opacity:.85;image-rendering:pixelated}
+
+  .social-links{display:flex;justify-content:center;gap:1rem;margin:2rem 0 3rem;flex-wrap:wrap}
+  .social-links a img{width:32px;height:32px;image-rendering:pixelated;transition:transform .1s, filter .1s}
+  .social-links a img:hover{transform:scale(1.2);filter: drop-shadow(0 0 8px var(--okGlow))}
+
+  details{
+    background:rgba(17,17,17,.9);
+    border:3px solid var(--border);
+    border-radius:0;
+    padding:1rem;
+    margin:0.8rem 0;
+    overflow:hidden;
+    position:relative;
+    transform: translateZ(0);
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+  details::before{
+    content:'⚠';
+    position:absolute;
+    right:1rem;top:0.5rem;
+    color:var(--accent);
+    font-size:1.5rem;
+    filter: drop-shadow(0 0 10px var(--dangerGlow));
+  }
+
+  details:hover{
+    transform: scale(1.01);
+    box-shadow: 0 0 18px rgba(95,108,122,.08), 0 0 18px rgba(255,0,0,.10);
+  }
+
+  details[open]{
+    border-color:var(--accent);
+    box-shadow:0 0 14px rgba(255,0,0,0.30);
+  }
+
+  details.pinned{
+    border-color: var(--accent);
+    box-shadow: 0 0 18px rgba(255,0,0,0.35);
+  }
+  details.pinned::after{
+    content:"PINNED";
+    position:absolute;
+    left:1rem;
+    top:0.6rem;
+    font-size:0.55rem;
+    color:var(--muted);
+    letter-spacing:1px;
+  }
+
+  summary{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:.8rem;
+    padding:0.5rem 0;
+    font-weight:700;
+    text-transform:uppercase;
+    user-select:none;
+  }
+  summary::-webkit-details-marker{display:none}
+
+  .chev{
+    display:inline-block;
+    width:1rem;height:1rem;
+    background:var(--fg);
+    transform:rotate(-45deg);
+    transition:transform .15s;
+    margin-left:0.5rem;
+    box-shadow: 0 0 8px rgba(95,108,122,.10);
+  }
+  details[open] .chev{transform:rotate(45deg)}
+
+  .content{
+    padding:1rem 0 0.5rem 2rem;
+    color:var(--fg);
+    font-size:0.7rem;
+    line-height:1.6;
+  }
+  code{
+    background:#0a0a0a;
+    color:var(--accent);
+    padding:0.2rem 0.4rem;
+    border:1px solid var(--fg);
+    font-family:monospace;
+    font-size:0.65rem
+  }
+  ul{margin:0.5rem 0;padding-left:1.5rem}
+  li{margin:0.3rem 0}
+
+  .note{color:var(--muted);font-size:0.65rem}
+  .danger{color:var(--accent);font-weight:700}
+  .no-wrap{white-space:nowrap}
+  .lang{margin-top:1.5rem}
+
+  .pixel-divider{
+    height:4px;
+    background:repeating-linear-gradient(90deg,var(--border) 0,var(--border) 4px,transparent 4px,transparent 8px);
+    margin:1.5rem 0;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    h1,.warning-header{animation:none}
+    details,.btn,.social-links a img{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<button id="lang-btn" class="btn">Magyar</button>
+
+<!-- ENGLISH -->
+<section id="english" class="lang">
+  <div class="warning-header">⚠ ⚠ ⚠</div>
+  <h1>⚠ WARNING DETECTED ⚠</h1>
+  <div class="pixel-divider"></div>
+
+  <details open>
+    <summary><span class="chev"></span>🔴 FLASHING EFFECTS ALERT</summary>
+    <div class="content">
+      <p>⚠ THIS GAME CONTAINS INTENSE FLASHING &amp; STROBE EFFECTS ⚠</p>
+      <p>Players with photosensitive epilepsy may experience seizures. Proceed with extreme caution. Have medical assistance ready if needed.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>⚫ PSYCHOLOGICAL CONTENT</summary>
+    <div class="content">
+      <p><em>Silent Tears</em> is NOT a casual game. It explores:</p>
+      <ul>
+        <li>Trauma &amp; mental breakdown</li>
+        <li>Self-harm &amp; suicidal thoughts</li>
+        <li>Psychological manipulation themes</li>
+      </ul>
+      <p>This is presented in a SERIOUS, realistic manner that mirrors a damaged mind.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>⛔ NOT FOR EVERYONE</summary>
+    <div class="content">
+      <p class="danger">DO NOT PLAY IF:</p>
+      <ul>
+        <li>You are currently struggling with mental health</li>
+        <li>You are easily disturbed or triggered</li>
+        <li>You prefer light-hearted gaming experiences</li>
+        <li>You are under parental guidance and haven't asked permission</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>🖥️ SYSTEM ACCESS NOTICE</summary>
+    <div class="content">
+      <p>The game accesses limited system data:</p>
+      <ul>
+        <li>Your Windows username (e.g., <code>C:\Users\YourName</code>)</li>
+        <li>System language settings</li>
+        <li>Save file paths</li>
+      </ul>
+      <p class="danger">IMPORTANT:</p> This data is <strong>NOT collected, NOT shared, and NOT uploaded</strong>. Used locally only for immersion &amp; personalization.
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>💾 YOUR SAVE FILES</summary>
+    <div class="content">
+      <p>Default save location:</p>
+      <div><code id="save-path-en-full">C:\Users\YourName\AppData\Roaming\Silent_Tears</code></div>
+      <p class="note">💡 TIP: Add <code>?user=YourName</code> to the URL to see your actual path on this page.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>📍 LOCATION DATA</summary>
+    <div class="content">
+      <p>On each launch, the game determines your approximate location (country/city) using your public IP address. This info is stored <strong>locally only</strong>:</p>
+      <div><code>C:/Users/YourName/Desktop/SilentTears/USER_DATA/user_location.json</code></div>
+      <p class="danger">⚠ NOT UPLOADED. ⚠ NEVER SHARED.</p> Used only to enhance immersion.
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>🐍 PYTHON SCRIPT BEHAVIOR</summary>
+    <div class="content">
+      <p>Background Python scripts may:</p>
+      <ul>
+        <li>Open your web browser (for help/external links)</li>
+        <li>Move your mouse slightly (immersion effect)</li>
+        <li>Simulate a "fake system repair" that temporarily uses more CPU — NOT a real repair, purely theatrical</li>
+      </ul>
+      <p><strong>These are harmless, temporary effects.</strong> No files are deleted, installed, or modified. No personal data is accessed.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>🚫 DISABLE PYTHON (NOT RECOMMENDED)</summary>
+    <div class="content">
+      <p>To prevent Python scripts from running, delete the <code>PYTHON_STUFF</code> folder.</p>
+      <p class="danger">WARNING:</p>
+      <ul>
+        <li>Immersion will be SIGNIFICANTLY reduced</li>
+        <li>Game may crash unexpectedly</li>
+        <li>Key features will malfunction</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>🛡️ ANTIVIRUS FALSE ALARMS</summary>
+    <div class="content">
+      <p>This game is <strong>NOT malware</strong>. However, because it uses system features (mouse input, browser calls, shell commands), some antivirus tools may flag it incorrectly.</p>
+      <p><strong>Solution:</strong> Whitelist the game folder in your antivirus/firewall settings. It's completely safe.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>📞 NEED HELP?</summary>
+    <div class="content">
+      Found a bug? Have questions? Need support? Contact us immediately via Discord or the social links below — we're here to help.
+    </div>
+  </details>
+</section>
+
+<!-- HUNGARIAN -->
+<section id="hungarian" class="lang" style="display:none">
+  <div class="warning-header">⚠ ⚠ ⚠</div>
+  <h1>⚠ FIGYELMEZTETÉS ⚠</h1>
+  <div class="pixel-divider"></div>
+
+  <details open>
+    <summary><span class="chev"></span>🔴 VILLOGÁS VESZÉLY</summary>
+    <div class="content">
+      <p>⚠ INTENZÍV VILLOGÓ EFFEKTEK JELENNEK MEG ⚠</p>
+      <p>Az epilepsziára fogékony játékosok rohamot kaphatnak. Óvatosan lépj be. Szükség esetén legyen orvos közelben.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>⚫ PSZICHOLÓGIAI TARTALOM</summary>
+    <div class="content">
+      <p>A <em>Silent Tears</em> NEM egy szórakoztató játék. Komoly témákat dolgoz fel:</p>
+      <ul>
+        <li>Trauma &amp; mentális összeomlás</li>
+        <li>Önsértés &amp; öngyilkossági gondolatok</li>
+        <li>Pszichológiai manipuláció</li>
+      </ul>
+      <p>Reális, súlyos hangnemben, egy sérült lélek perspektívájából.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>⛔ NEM MINDENKINEK VALÓ</summary>
+    <div class="content">
+      <p class="danger">NE JÁTSSZ, HA:</p>
+      <ul>
+        <li>Mentális problémákkal küzdesz</li>
+        <li>Könnyen felkavarod magad</li>
+        <li>Könnyű, szórakoztató játékokra vágysz</li>
+        <li>Szülői felügyelet alatt állsz és nincs engedély</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>🖥️ RENDSZERHOZZÁFÉRÉS</summary>
+    <div class="content">
+      <p>A játék korlátozott adatokat olvas:</p>
+      <ul>
+        <li>Windows felhasználónév (pl. <code>C:\Users\Felhasznalo</code>)</li>
+        <li>Rendszer nyelvezete</li>
+        <li>Mentési útvonal</li>
+      </ul>
+      <p class="danger">FONTOS:</p> Az adatok <strong>NEM tárolódnak, NEM megosztódnak, NEM töltődnek fel</strong>. Csak lokálisan, az élmény javítására.
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>💾 A TE MENTÉSEID</summary>
+    <div class="content">
+      <p>Alapértelmezett hely:</p>
+      <div><code id="save-path-hu-full">C:\Felhasználók\Felhasznalo\AppData\Roaming\Silent_Tears</code></div>
+      <p class="note">💡 TIPP: Add az URL-hez a <code>?user=Felhasznalo</code> kódot, hogy lásd az igazi útvonaladat.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>📍 HELYADATOK</summary>
+    <div class="content">
+      <p>Minden indításkor a nyilvános IP alapján a játék meghatározza a közelítő helyedet (ország/város). Ez <strong>csak helyben</strong> kerül mentésre:</p>
+      <div><code>C:/Felhasználók/Felhasznalo/Asztal/SilentTears/USER_DATA/user_location.json</code></div>
+      <p class="danger">⚠ NEM FELTÖLTÖTT. ⚠ SOHA NEM MEGOSZTOTT.</p> Csak atmoszféra javításra.
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>🐍 PYTHON SZKRIPTEK</summary>
+    <div class="content">
+      <p>A háttérfolyamatok:</p>
+      <ul>
+        <li>Megnyithatják a böngészőt (segítség/linkek)</li>
+        <li>Enyhén mozgathatják az egeret (immerzió)</li>
+        <li>Szimulálhatnak egy "rendszerparkurálást" — NEM igazi, pusztán teátrális</li>
+      </ul>
+      <p><strong>Ezek ártalmatlanok, átmenetiek.</strong> Semmi nem kerül törlésre vagy telepítésre. Privát adatod nem érinti.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>🚫 PYTHON LETILTÁSA (NEM AJÁNLOTT)</summary>
+    <div class="content">
+      <p>Ha nem szeretnéd a Python-kódokat, töröld a <code>PYTHON_STUFF</code> mappát.</p>
+      <p class="danger">FIGYELEM:</p>
+      <ul>
+        <li>Az immerziót DRASZTIKUSAN csökkenti</li>
+        <li>Váratlan játékhiba fordulhat elő</li>
+        <li>Funkciók nem működnek rendesen</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>🛡️ VÍRUSIRTÓ RIASZTÁSOK</summary>
+    <div class="content">
+      <p>Ez a játék <strong>NEM vírus</strong>. De mivel rendszerfunkciók használ (egér, böngésző, parancsok), a vírusirtók tévedésből szirénázhatnak.</p>
+      <p><strong>Megoldás:</strong> Vedd fel a játékot a vírusirtó/tűzfal kivételjeibe. Teljesen biztonságos.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>📞 SEGÍTSÉG?</summary>
+    <div class="content">
+      Hibát találtál? Kérdésed van? Lépj velünk kapcsolatba azonnal a Discord-on vagy a közösségi oldalakon — segíteni fogunk!
+    </div>
+  </details>
+</section>
+
+<div class="pixel-divider"></div>
+
+<button id="back-btn" class="btn">⏹️ Back to Game</button>
+
+<img id="studio-logo" src="studio_logo_png.png" alt="Dead Silent Studio"/>
+
+<div class="social-links">
+  <a href="https://discord.gg/2MJZR9hYH3" target="_blank" rel="noreferrer"><img src="discord.png" alt="Discord"></a>
+  <a href="https://www.tiktok.com/@silent.dead.studio" target="_blank" rel="noreferrer"><img src="tiktok.png" alt="TikTok"></a>
+  <a href="https://www.youtube.com/@Silent_Dead_Studio" target="_blank" rel="noreferrer"><img src="youtube.png" alt="YouTube"></a>
+</div>
+
+<script>
+(function(){
+  const params = new URLSearchParams(location.search);
+  const user = (params.get("user") || "YourName").replace(/[\\/:*?\"<>|]/g,"");
+
+  document.getElementById("save-path-en-full").textContent =
+    `C:\\Users\\${user}\\AppData\\Roaming\\Silent_Tears`;
+  document.getElementById("save-path-hu-full").textContent =
+    `C:\\Felhasználók\\${user}\\AppData\\Roaming\\Silent_Tears`;
+
+  const en = document.getElementById("english");
+  const hu = document.getElementById("hungarian");
+  const langBtn = document.getElementById("lang-btn");
+  const backBtn = document.getElementById("back-btn");
+
+  let huMode = false;
+  langBtn.addEventListener("click",()=>{
+    huMode = !huMode;
+    en.style.display = huMode ? "none" : "block";
+    hu.style.display = huMode ? "block" : "none";
+    langBtn.textContent = huMode ? "English" : "Magyar";
+    backBtn.textContent = huMode ? "⏹️ Vissza a játékba" : "⏹️ Back to Game";
+  });
+
+  backBtn.addEventListener("click",()=>{
+    window.close();
+    setTimeout(()=>history.back(),50);
+  });
+
+  document.querySelectorAll("details").forEach((detail)=>{
+    const summary = detail.querySelector("summary");
+
+    detail.addEventListener("mouseenter", ()=>{
+      detail.open = true;
+    });
+
+    detail.addEventListener("mouseleave", ()=>{
+      if(!detail.classList.contains("pinned")){
+        detail.open = false;
+      }
+    });
+
+    summary.addEventListener("click", ()=>{
+      setTimeout(()=>{
+        if(detail.open){
+          detail.classList.add("pinned");
+        }else{
+          detail.classList.remove("pinned");
+        }
+      }, 0);
+    });
+
+    if(detail.open){
+      detail.classList.add("pinned");
+    }
+  });
+})();
+</script>
+</body>
+</html>
