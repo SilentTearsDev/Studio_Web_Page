@@ -6,13 +6,7 @@
       "repo": "Studio_Web_Page",
       "date": "2026-03-20",
       "title": "Update updates.json",
-      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/b0759e72c1ef96ec93b724977b76d531218b8e4a"
-    },
-    {
-      "repo": "Python",
-      "date": "2026-02-22",
-      "title": ".",
-      "url": "https://github.com/SilentTearsDev/Python/commit/3aeaf6ec0bdd49e0f4dd7e085c1891b026dcc3d1"
+      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/f845aed99ed5cc1f0016671c058d61995c317bb4"
     },
     {
       "repo": "NEXA",
@@ -21,5 +15,11 @@
       "url": "https://github.com/SilentTearsDev/NEXA/commit/9f8cb17f686c6ff75a5d2a1a6646bb60e02cbb28"
     }
   ],
-  "errors": []
+  "errors": [
+    {
+      "repo": "Python",
+      "status": 502,
+      "detail": "{\n  \"message\": \"Server Error\"\n}\n"
+    }
+  ]
 }
