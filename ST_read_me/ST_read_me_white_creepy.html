@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>SILENT TEARS — WARNING</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e8e8e8;        /* main background (not pure white) */
+  --panel:#f2f2f2;     /* cards */
+  --panel2:#e0e0e0;    /* hover / active */
+  --fg:#111111;        /* text */
+  --muted:#555555;
+  --border:#cfcfcf;
+
+  /* horror accent */
+  --accent:#8b0000;
+}
+*{box-sizing:border-box}
+html{min-height:100%;background:#eee5da;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;max-width:100vw;min-height:100%;color:var(--fg);font-family:'Press Start 2P',monospace;margin:0;padding:clamp(1rem,3vw,2.5rem);line-height:1.75;overflow-x:hidden;background:radial-gradient(circle at 50% -12%,rgba(155,0,24,.16),transparent 31rem),radial-gradient(circle at 100% 18%,rgba(42,27,34,.08),transparent 22rem),linear-gradient(180deg,var(--bg2),var(--bg) 52%,#eee5da 100%)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:linear-gradient(rgba(0,0,0,.035) 50%,rgba(255,255,255,.18) 50%),linear-gradient(90deg,rgba(155,0,24,.035),rgba(0,0,0,.018)),radial-gradient(circle at 24% 18%,rgba(155,0,24,.06),transparent 10rem),radial-gradient(circle at 76% 72%,rgba(0,0,0,.055),transparent 14rem);background-size:100% 5px,7px 100%,auto,auto;opacity:.62;mix-blend-mode:multiply}
+body::after{content:"SILENT TEARS // READ BEFORE PLAYING";position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);z-index:0;color:rgba(80,42,38,.15);font-size:.55rem;letter-spacing:.25rem;white-space:nowrap;pointer-events:none}
+.lang,.pixel-divider,#back-btn,#studio-logo,.social-links{position:relative;z-index:1}
+.lang{width:min(980px,100%);max-width:980px;overflow:hidden;margin:0 auto;padding:clamp(1rem,3vw,2rem);border:1px solid var(--border);background:linear-gradient(180deg,rgba(255,253,248,.92),rgba(245,238,229,.86)),repeating-linear-gradient(0deg,rgba(155,0,24,.018) 0 1px,transparent 1px 7px);box-shadow:0 0 0 1px rgba(255,255,255,.85) inset,0 2rem 5rem var(--shadow),0 0 4rem var(--glow);clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px))}
+.warning-header{text-align:center;font-size:clamp(2.2rem,7vw,4.5rem);line-height:1;margin:.4rem 0 1rem;color:var(--blood2);text-shadow:2px 0 rgba(0,0,0,.09),-2px 0 rgba(155,0,24,.14),0 .45rem 1.2rem rgba(155,0,24,.16);animation:pulse 3s steps(2,end) infinite}
+@keyframes pulse{0%,100%{opacity:.82;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}
+h1{text-align:center;font-size:clamp(1.2rem,4vw,2.1rem);letter-spacing:.28rem;margin:0 0 .7rem;color:var(--bruise);font-weight:400;text-shadow:0 1px 0 #fff,0 .7rem 1.4rem rgba(155,0,24,.11)}
+h1::after{content:"READ BEFORE PLAYING";display:block;margin-top:.75rem;color:var(--muted);font-size:.48rem;letter-spacing:.22rem}#hungarian h1::after{content:"OLVASD EL JÁTÉK ELŐTT"}
+.pixel-divider{width:min(980px,100%);height:1px;margin:1.4rem auto;background:linear-gradient(90deg,transparent,rgba(155,0,24,.75),rgba(20,20,20,.22),rgba(155,0,24,.75),transparent);box-shadow:0 0 1.4rem var(--glow)}
+.btn{background:rgba(255,253,248,.94);color:var(--fg);border:1px solid var(--border);padding:.85rem 1rem;cursor:pointer;font-size:.62rem;letter-spacing:.09rem;text-transform:uppercase;font-family:'Press Start 2P',monospace;transition:transform .12s ease,border-color .12s ease,background .12s ease,box-shadow .12s ease,color .12s ease;box-shadow:0 .7rem 1.5rem rgba(49,25,20,.11)}
+.btn:hover,.btn:focus-visible{transform:translateY(-1px);background:#fff7f2;color:var(--blood);border-color:var(--blood2);box-shadow:0 .8rem 1.6rem rgba(155,0,24,.12),0 0 1.4rem var(--glow);outline:none}
+#lang-btn{position:fixed;right:1rem;top:1rem;z-index:1000;font-size:.55rem}#back-btn{display:block;margin:1.6rem auto 1.3rem;min-width:270px;text-align:center}
+details{position:relative;background:linear-gradient(180deg,var(--panel),rgba(248,241,233,.9));border:1px solid var(--border);padding:0;margin:.75rem 0;overflow:hidden;box-shadow:0 .7rem 1.4rem rgba(49,25,20,.09);-webkit-tap-highlight-color:rgba(155,0,24,.14)}
+details::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blood);opacity:.82}details::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(155,0,24,.035),transparent 28%);opacity:.65}details[open]{border-color:#b99b92;box-shadow:0 .8rem 1.8rem rgba(49,25,20,.14),0 0 1.5rem rgba(155,0,24,.08)}
+summary{list-style:none;cursor:pointer;min-height:48px;font-size:.68rem;letter-spacing:.08rem;display:flex;align-items:center;gap:.8rem;user-select:none;padding:1rem 1rem 1rem 1.2rem;color:var(--bruise);overflow-wrap:anywhere}summary:hover{background:rgba(155,0,24,.045)}summary::-webkit-details-marker{display:none}
+.chev{width:9px;height:9px;min-width:9px;border-right:2px solid var(--blood2);border-bottom:2px solid var(--blood2);transform:rotate(-45deg);transition:transform .15s ease;filter:drop-shadow(0 0 6px var(--glow))}details[open] .chev{transform:rotate(45deg)}
+.content{margin:0;padding:0 1.2rem 1.15rem 2.3rem;font-size:.63rem;color:#292421;overflow-wrap:anywhere}.content p{margin:.6rem 0}.content div{max-width:100%}.danger{color:var(--blood2);font-weight:700;text-shadow:0 0 10px rgba(155,0,24,.13)}.note{color:var(--muted)}strong,em{color:#080606}
+code{display:inline-block;max-width:100%;overflow-wrap:anywhere;white-space:normal;word-break:break-word;background:#fff8f3;border:1px solid #d8c9bd;padding:.25rem .45rem;font-size:.58rem;color:#5c0011;font-family:Consolas,'Courier New',monospace;box-shadow:0 0 1rem rgba(155,0,24,.055) inset}
+ul{margin:.55rem 0;padding-left:1.1rem}li{margin:.35rem 0;padding-left:.15rem}li::marker{color:var(--blood2)}.no-wrap{white-space:nowrap}
+#studio-logo{display:block;margin:1.6rem auto 1rem;width:118px;opacity:.78;image-rendering:pixelated;filter:grayscale(100%) contrast(1.1) sepia(.12) drop-shadow(0 .7rem 1rem rgba(49,25,20,.18))}
+.social-links{display:flex;justify-content:center;gap:.75rem;margin:1.4rem 0 0;flex-wrap:wrap}.social-links a{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--border);background:rgba(255,253,248,.88);transition:transform .12s ease,border-color .12s ease,box-shadow .12s ease,background .12s ease}.social-links a:hover{transform:translateY(-2px);border-color:var(--blood2);background:#fff7f2;box-shadow:0 0 1.2rem var(--glow)}.social-links a img{width:24px;height:24px;filter:grayscale(100%) contrast(1.15);opacity:.85}
+summary,.content,.btn,h1,h1::after{overflow-wrap:anywhere}
+@media (max-width:700px){body{padding:.8rem .7rem 2rem}body::after{display:none}.lang{padding:1rem;clip-path:none}h1{letter-spacing:.16rem}h1::after{font-size:.42rem;letter-spacing:.12rem}summary{font-size:.55rem;padding:.9rem .75rem .9rem 1rem;gap:.65rem}.content{font-size:.55rem;padding:0 .85rem 1rem 1.6rem}code{font-size:.52rem}#lang-btn{right:.7rem;top:.7rem;font-size:.5rem;padding:.65rem .7rem}#back-btn{min-width:unset;width:min(100%,420px);font-size:.55rem}}
+@media (max-width:520px){body{padding:.65rem .55rem 1.6rem;line-height:1.6}body::before{opacity:.42;background-size:100% 6px,8px 100%,auto,auto}.lang{padding:.85rem .65rem;border-left-color:#d1c0b3;border-right-color:#d1c0b3;box-shadow:0 1rem 2.4rem rgba(49,25,20,.18),0 0 2rem rgba(155,0,24,.12)}.warning-header{font-size:2rem;margin:2.6rem 0 .75rem}h1{font-size:1rem;letter-spacing:.09rem;line-height:1.45}h1::after{font-size:.36rem;letter-spacing:.07rem;line-height:1.7;margin-top:.55rem}.pixel-divider{margin:1rem auto}#lang-btn{position:absolute;top:.65rem;right:.55rem;font-size:.46rem;padding:.55rem .58rem;max-width:42vw}details{margin:.58rem 0}details::before{width:2px}summary{font-size:.49rem;line-height:1.65;gap:.55rem;padding:.78rem .62rem .78rem .78rem;align-items:flex-start}.chev{width:8px;height:8px;min-width:8px;margin-top:.28rem}.content{font-size:.49rem;line-height:1.75;padding:0 .68rem .85rem 1.25rem}.content p{margin:.48rem 0}ul{padding-left:.9rem;margin:.45rem 0}li{margin:.28rem 0}code{display:inline;font-size:.48rem;line-height:1.75;padding:.18rem .28rem}.content div>code{display:block;width:100%;padding:.45rem .5rem}#back-btn{width:100%;min-height:48px;margin:1.1rem auto .95rem;font-size:.48rem;line-height:1.6;padding:.78rem .65rem}#studio-logo{width:88px;margin:1rem auto .75rem}.social-links{gap:.55rem;margin:1rem 0 0}.social-links a{width:38px;height:38px}.social-links a img{width:21px;height:21px}}
+@media (max-width:360px){body{padding:.5rem .42rem 1.3rem}.lang{padding:.72rem .5rem}.warning-header{font-size:1.6rem}h1{font-size:.84rem}summary,.content,#back-btn{font-size:.43rem}h1::after,#lang-btn{font-size:.38rem}#lang-btn{padding:.48rem .5rem}}
+</style>
+</head>
+<body>
+
+<button id="lang-btn" class="btn">Magyar</button>
+
+<section id="english" class="lang">
+  <div class="warning-header">⚠ ⚠ ⚠</div>
+  <h1>WARNING</h1>
+  <div class="pixel-divider"></div>
+
+  <details open>
+    <summary><span class="chev"></span>FLASHING EFFECTS ALERT</summary>
+    <div class="content">
+      <p>THIS GAME CONTAINS INTENSE FLASHING AND STROBE EFFECTS.</p>
+      <p>Players with photosensitive epilepsy may experience seizures. Proceed with caution.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>PSYCHOLOGICAL CONTENT</summary>
+    <div class="content">
+      <p><em>Silent Tears</em> is not a casual game. It explores:</p>
+      <ul>
+        <li>Trauma and mental breakdown</li>
+        <li>Self-harm and suicidal thoughts</li>
+        <li>Psychological manipulation themes</li>
+      </ul>
+      <p>This is presented in a serious, realistic way.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>NOT FOR EVERYONE</summary>
+    <div class="content">
+      <p class="danger">DO NOT PLAY IF:</p>
+      <ul>
+        <li>You are currently struggling with mental health</li>
+        <li>You are easily disturbed or triggered</li>
+        <li>You prefer light-hearted gaming experiences</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>SYSTEM ACCESS NOTICE</summary>
+    <div class="content">
+      <p>The game accesses limited system data:</p>
+      <ul>
+        <li>Your Windows username (for example: <code>C:\Users\YourName</code>)</li>
+        <li>System language settings</li>
+        <li>Save file paths</li>
+      </ul>
+      <p><span class="danger">IMPORTANT:</span> This data is <strong>not collected, not shared, and not uploaded</strong>. It is used locally only for immersion and personalization.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>SAVE FILES</summary>
+    <div class="content">
+      <p>Default save location:</p>
+      <div><code id="save-path-en-full">C:\Users\YourName\AppData\Roaming\Silent_Tears</code></div>
+      <p class="note">Tip: add <code>?user=YourName</code> to the URL to show your actual path on this page.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>LOCATION DATA</summary>
+    <div class="content">
+      <p>On each launch, the game may determine your approximate location using your public IP address. This information is stored locally only:</p>
+      <div><code>C:/Users/YourName/Roaming/Silent_Tears/ip_info.txt</code></div>
+      <p><span class="danger">NOT UPLOADED. NEVER SHARED.</span> Used only to enhance immersion.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>BAT AND PYTHON SCRIPT BEHAVIOR</summary>
+    <div class="content">
+      <p>Background scripts may:</p>
+      <ul>
+        <li>Open your web browser</li>
+        <li>Move your mouse slightly</li>
+        <li>Simulate temporary effects</li>
+      </ul>
+      <p><strong>These are harmless, temporary effects.</strong> No files are deleted, installed, or modified. No personal data is accessed.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>DISABLE SCRIPTS (NOT RECOMMENDED)</summary>
+    <div class="content">
+      <p>To prevent scripts from running, delete the <code>project_tools</code> folder.</p>
+      <p class="danger">WARNING:</p>
+      <ul>
+        <li>Immersion will be significantly reduced</li>
+        <li>The game may crash unexpectedly</li>
+        <li>Some features may malfunction</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>ANTIVIRUS FALSE ALARMS</summary>
+    <div class="content">
+      <p>This game is <strong>not malware</strong>. However, because it uses system features such as browser calls, shell commands, and input interaction, some antivirus tools may flag it incorrectly.</p>
+      <p><strong>Solution:</strong> whitelist the game folder in your antivirus or firewall settings, or disable them temporarily while you play.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>NEED HELP?</summary>
+    <div class="content">
+      <p>Found a bug? Have questions? Need support? Contact us through Discord or the links below.</p>
+    </div>
+  </details>
+</section>
+
+<section id="hungarian" class="lang" style="display:none">
+  <div class="warning-header">⚠ ⚠ ⚠</div>
+  <h1>FIGYELMEZTETÉS</h1>
+  <div class="pixel-divider"></div>
+
+  <details open>
+    <summary><span class="chev"></span>VILLOGÓ EFFEKTEK</summary>
+    <div class="content">
+      <p>A JÁTÉK INTENZÍV VILLOGÓ ÉS STROBOSZKÓP EFFEKTEKET TARTALMAZ.</p>
+      <p>Az epilepsziára érzékeny játékosoknál ez rohamot válthat ki. Csak saját felelősségre.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>PSZICHOLÓGIAI TARTALOM</summary>
+    <div class="content">
+      <p>A <em>Silent Tears</em> nem könnyed játék. Többek között ezeket a témákat dolgozza fel:</p>
+      <ul>
+        <li>Trauma és mentális összeomlás</li>
+        <li>Önsértés és öngyilkossági gondolatok</li>
+        <li>Pszichológiai manipuláció</li>
+      </ul>
+      <p>A megjelenítés komoly és realisztikus jellegű.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>NEM MINDENKINEK VALÓ</summary>
+    <div class="content">
+      <p class="danger">NE JÁTSSZ, HA:</p>
+      <ul>
+        <li>Jelenleg mentális nehézségekkel küzdesz</li>
+        <li>Könnyen felzaklatnak az ilyen tartalmak</li>
+        <li>Könnyedebb játékélményt keresel</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>RENDSZERHOZZÁFÉRÉS</summary>
+    <div class="content">
+      <p>A játék korlátozott rendszeradatokat olvas:</p>
+      <ul>
+        <li>A Windows felhasználónevedet</li>
+        <li>A rendszer nyelvi beállításait</li>
+        <li>A mentési útvonalakat</li>
+      </ul>
+      <p><span class="danger">FONTOS:</span> Ezek az adatok <strong>nem kerülnek feltöltésre, megosztásra vagy gyűjtésre</strong>. Kizárólag helyben vannak használva az élmény részeként.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>MENTÉSEK</summary>
+    <div class="content">
+      <p>Alapértelmezett mentési hely:</p>
+      <div><code id="save-path-hu-full">C:\Felhasználók\Felhasznalo\AppData\Roaming\Silent_Tears</code></div>
+      <p class="note">Tipp: add hozzá az URL-hez a <code>?user=Felhasznalo</code> részt, és itt a saját útvonalad jelenik meg.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>HELYADATOK</summary>
+    <div class="content">
+      <p>Indításkor a játék a nyilvános IP-cím alapján meghatározhatja a hozzávetőleges helyzetedet. Ez csak helyben kerül mentésre:</p>
+      <div><code>C:/Felhasználók/Felhasznalo/AppData/Roaming/Silent_Tears/ip_info.txt</code></div>
+      <p><span class="danger">NEM KERÜL FELTÖLTÉSRE. NEM KERÜL MEGOSZTÁSRA.</span></p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>BAT ÉS PYTHON SZKRIPTEK</summary>
+    <div class="content">
+      <p>A háttérben futó szkriptek például:</p>
+      <ul>
+        <li>Megnyithatják a böngészőt</li>
+        <li>Enyhén megmozgathatják az egeret</li>
+        <li>Ideiglenes effektusokat szimulálhatnak</li>
+      </ul>
+      <p><strong>Ezek ártalmatlan, ideiglenes műveletek.</strong> Nem törölnek, nem telepítenek, nem módosítanak fájlokat, és nem férnek hozzá személyes adatokhoz.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>SZKRIPTEK LETILTÁSA (NEM AJÁNLOTT)</summary>
+    <div class="content">
+      <p>Ha meg akarod akadályozni a szkriptek futását, töröld a <code>project_tools</code> mappát.</p>
+      <p class="danger">FIGYELEM:</p>
+      <ul>
+        <li>Az élmény jelentősen gyengülni fog</li>
+        <li>A játék váratlanul összeomolhat</li>
+        <li>Egyes funkciók hibásan működhetnek</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>VÍRUSIRTÓ TÉVES RIASZTÁSOK</summary>
+    <div class="content">
+      <p>Ez a játék <strong>nem vírus</strong>. Viszont mivel használ bizonyos rendszerfunkciókat, egyes vírusirtók tévesen gyanúsnak jelölhetik.</p>
+      <p><strong>Megoldás:</strong> add kivételhez a játék mappáját a vírusirtóban vagy a tűzfalban, vagy ideiglenesen kapcsold ki ezeket játék közben.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="chev"></span>SEGÍTSÉG</summary>
+    <div class="content">
+      <p>Hibát találtál? Kérdésed van? Segítség kell? Írj nekünk Discordon vagy az alábbi linkeken.</p>
+    </div>
+  </details>
+</section>
+
+<div class="pixel-divider"></div>
+
+<button id="back-btn" class="btn">Back to Main Page</button>
+
+<img id="studio-logo" src="studio_logo_png.png" alt="Dead Silent Studio"/>
+
+<div class="social-links">
+  <a href="https://discord.gg/2MJZR9hYH3" target="_blank" rel="noreferrer"><img src="discord.png" alt="Discord"></a>
+  <a href="https://www.tiktok.com/@silent.dead.studio" target="_blank" rel="noreferrer"><img src="tiktok.png" alt="TikTok"></a>
+  <a href="https://www.youtube.com/@Silent_Dead_Studio" target="_blank" rel="noreferrer"><img src="youtube.png" alt="YouTube"></a>
+</div>
+
+<script>
+(function(){
+  const params = new URLSearchParams(location.search);
+  const user = (params.get("user") || "YourName").replace(/[\\/:*?"<>|]/g,"");
+
+  document.getElementById("save-path-en-full").textContent =
+    `C:\\Users\\${user}\\AppData\\Roaming\\Silent_Tears`;
+
+  document.getElementById("save-path-hu-full").textContent =
+    `C:\\Felhasználók\\${user}\\AppData\\Roaming\\Silent_Tears`;
+
+  const en = document.getElementById("english");
+  const hu = document.getElementById("hungarian");
+  const langBtn = document.getElementById("lang-btn");
+  const backBtn = document.getElementById("back-btn");
+
+  let huMode = false;
+
+  langBtn.addEventListener("click", () => {
+    huMode = !huMode;
+    en.style.display = huMode ? "none" : "block";
+    hu.style.display = huMode ? "block" : "none";
+    langBtn.textContent = huMode ? "English" : "Magyar";
+    backBtn.textContent = huMode ? "Vissza a Főoldalra" : "Back to Main Page";
+  });
+
+  backBtn.addEventListener("click", () => {
+    window.close();
+    setTimeout(() => history.back(), 50);
+  });
+})();
+</script>
+
+</body>
+</html>
