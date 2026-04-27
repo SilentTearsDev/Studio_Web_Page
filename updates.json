@@ -3,22 +3,22 @@
   "generated": true,
   "updates": [
     {
+      "repo": "Python",
+      "date": "2026-04-27",
+      "title": "godot resource maker test",
+      "url": "https://github.com/SilentTearsDev/Python/commit/ca3d4ee3f436d6a4836a50f54570d1db3c2399b0"
+    },
+    {
       "repo": "Studio_Web_Page",
       "date": "2026-04-26",
       "title": "Update updates.json",
-      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/d77e7b553e2c710cf18c8de37ae41f18c7f03a2f"
+      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/cded8c50e4e7be6db072059e2a116ca60e51d05a"
     },
     {
       "repo": "NEXA",
       "date": "2026-03-25",
       "title": "Update chat_bot.py",
       "url": "https://github.com/SilentTearsDev/NEXA/commit/8e0d85a015813565dfe9562911ad1a9f5ac87057"
-    },
-    {
-      "repo": "Python",
-      "date": "2026-02-22",
-      "title": ".",
-      "url": "https://github.com/SilentTearsDev/Python/commit/3aeaf6ec0bdd49e0f4dd7e085c1891b026dcc3d1"
     }
   ],
   "errors": []
