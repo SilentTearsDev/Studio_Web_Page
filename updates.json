@@ -3,16 +3,16 @@
   "generated": true,
   "updates": [
     {
+      "repo": "Python",
+      "date": "2026-04-28",
+      "title": ".",
+      "url": "https://github.com/SilentTearsDev/Python/commit/1b9a8aa96a26b381f0cfe112a51de0d87a23f70b"
+    },
+    {
       "repo": "Studio_Web_Page",
       "date": "2026-04-27",
       "title": "Update updates.json",
-      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/726bab290062c81039f2e88b0161bcedfee7fc6e"
-    },
-    {
-      "repo": "Python",
-      "date": "2026-04-27",
-      "title": "godot resource maker test",
-      "url": "https://github.com/SilentTearsDev/Python/commit/ca3d4ee3f436d6a4836a50f54570d1db3c2399b0"
+      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/c589e72f79025cdad32e8fdd3e496893bca72746"
     },
     {
       "repo": "NEXA",
