@@ -6,19 +6,19 @@
       "repo": "Studio_Web_Page",
       "date": "2026-05-18",
       "title": "Update updates.json",
-      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/b6bb2e764fc734659a917392151d456e0cd0b9a9"
+      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/1db0687503389dc11f869a617b9d8c739d23b52f"
+    },
+    {
+      "repo": "NEXA",
+      "date": "2026-05-18",
+      "title": "Update README.md",
+      "url": "https://github.com/SilentTearsDev/NEXA/commit/f61ebf40b2e13ede0c3bd78d8e73c12ad81bf273"
     },
     {
       "repo": "Python",
       "date": "2026-04-28",
       "title": ".",
       "url": "https://github.com/SilentTearsDev/Python/commit/1b9a8aa96a26b381f0cfe112a51de0d87a23f70b"
-    },
-    {
-      "repo": "NEXA",
-      "date": "2026-03-25",
-      "title": "Update chat_bot.py",
-      "url": "https://github.com/SilentTearsDev/NEXA/commit/8e0d85a015813565dfe9562911ad1a9f5ac87057"
     }
   ],
   "errors": []
