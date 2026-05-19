@@ -4,15 +4,15 @@
   "updates": [
     {
       "repo": "Studio_Web_Page",
-      "date": "2026-05-18",
+      "date": "2026-05-19",
       "title": "Update updates.json",
-      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/1db0687503389dc11f869a617b9d8c739d23b52f"
+      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/888e2e9db6c9089de749b0b7b0dc5e51928c1f96"
     },
     {
       "repo": "NEXA",
-      "date": "2026-05-18",
-      "title": "Update README.md",
-      "url": "https://github.com/SilentTearsDev/NEXA/commit/f61ebf40b2e13ede0c3bd78d8e73c12ad81bf273"
+      "date": "2026-05-19",
+      "title": "executable",
+      "url": "https://github.com/SilentTearsDev/NEXA/commit/5b3ac1e46b17f4f76786d4ada5346444cbf05839"
     },
     {
       "repo": "Python",
