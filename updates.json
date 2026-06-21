@@ -4,15 +4,15 @@
   "updates": [
     {
       "repo": "Studio_Web_Page",
-      "date": "2026-06-20",
+      "date": "2026-06-21",
       "title": "Update updates.json",
-      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/27e08010f663be4a1deec0adc204e371ddc9795b"
+      "url": "https://github.com/SilentTearsDev/Studio_Web_Page/commit/6c0e9e8d199bed5a59202572264381db88a006c3"
     },
     {
       "repo": "Python",
-      "date": "2026-06-19",
-      "title": "Update xbox_extract.py",
-      "url": "https://github.com/SilentTearsDev/Python/commit/129759502c8eba357db6cd1b282d7ab1da3c4f96"
+      "date": "2026-06-21",
+      "title": "Delete xbox_extract.py",
+      "url": "https://github.com/SilentTearsDev/Python/commit/7beab827b3493fdfae81a9f25094335b77b36b9b"
     },
     {
       "repo": "NEXA",
